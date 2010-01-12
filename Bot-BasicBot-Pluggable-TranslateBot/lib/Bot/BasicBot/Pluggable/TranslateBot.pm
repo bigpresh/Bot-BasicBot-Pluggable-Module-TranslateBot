@@ -117,6 +117,13 @@ sub told {
 sub _translate {
     my ($self, $phrase, $from, $to) = @_;
     warn "Translating '$phrase' from '$from' to '$to'";
+    for ($from,$to) {
+        lc $_;
+        if (!$self->{translate}{languages}{$_}) {
+            warn "Unknown language $_";
+            return "Unrecognised language code $_";
+        }
+    }
     my $lt = Lingua::Translate->new(src => $from, dest => $to);
     if (!$lt) {
         warn "No Lingua::Translate object to translate $from -> $to";
