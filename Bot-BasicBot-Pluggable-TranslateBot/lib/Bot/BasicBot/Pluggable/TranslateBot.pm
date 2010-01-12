@@ -1,7 +1,7 @@
 
-# $Id: Translate.pm 711 2009-09-02 10:47:25Z davidp $
+# $Id$
 
-package Bot::BasicBot::Pluggable::Module::Translate;
+package Bot::BasicBot::Pluggable::Module::TranslateBot;
 use strict;
 use Bot::BasicBot::Pluggable::Module;
 use base 'Bot::BasicBot::Pluggable::Module';
@@ -36,7 +36,7 @@ sub init {
 
 sub help {
     my $self = shift;
-    my $idtxt = '$Id: Translate.pm 711 2009-09-02 10:47:25Z davidp $';
+    my $idtxt = '$Id$';
     my $lang_list = $self->{translate}{lang_list};
     <<HELP
 Translate text to/from given languages.
