@@ -132,17 +132,38 @@ sub _translate {
         warn "No Lingua::Translate object to translate $from -> $to";
         return;
     }
+
+    # If the message contains channel names, Google will try to translate them.
+    # We don't want that.  Replace all channel names with numeric placeholders,
+    # which we can change back after translation...
+    my %placeholders;
+    $phrase =~ s{(#{1,2}\S+)}
+                {
+                    my $token = join '', map { int rand 10 } 0..6;
+                    $placeholders{$token} = $1;
+                    "ctoken$token";
+                }ge;
+
     my $phrase = HTML::Entities::encode_entities
     my $translation = decode_utf8(
         HTML::Entities::encode_entities($lt->translate($phrase))
     );
-    if ($translation) {
-        warn "Translated to $translation";
-        return HTML::Entities::decode_entities($translation);
-    } else {
+    if (!$translation) {
+        warn "No translation";
         return;
     }
+
+    warn "Translated to $translation";
+    
+    # Now, look for any channel name tokens we added earlier, and replace them
+    # with the original channel name:
+    $translation =~ s{ctoken(\d+)}{$placeholders{$1}}ge;
+
+    warn "Translation after replacing tokens: $translation";
+    return HTML::Entities::decode_entities($translation);
 }
+
+
 
 1;
 __END__
