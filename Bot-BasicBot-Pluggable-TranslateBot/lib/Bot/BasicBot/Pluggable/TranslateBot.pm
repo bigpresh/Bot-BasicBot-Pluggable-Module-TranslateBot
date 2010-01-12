@@ -18,7 +18,7 @@ my $config = YAML::LoadFile($ENV{HOME} . '/.translatebot')
 Lingua::Translate::config (
     back_end => 'Google',
     api_key  => $config->{api_key},
-    referer  => $config->{referer} || $config->{referrer}',
+    referer  => $config->{referer} || $config->{referrer},
 );
 
 
