@@ -132,7 +132,10 @@ sub _translate {
         warn "No Lingua::Translate object to translate $from -> $to";
         return;
     }
-    my $translation = decode_utf8($lt->translate($phrase));
+    my $phrase = HTML::Entities::encode_entities
+    my $translation = decode_utf8(
+        HTML::Entities::encode_entities($lt->translate($phrase))
+    );
     if ($translation) {
         warn "Translated to $translation";
         return HTML::Entities::decode_entities($translation);
