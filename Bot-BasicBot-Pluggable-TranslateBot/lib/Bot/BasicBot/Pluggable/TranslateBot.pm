@@ -10,12 +10,15 @@ use Lingua::Translate;
 use Lingua::Translate::Google;
 use I18N::LangTags::List;
 use HTML::Entities;
+use YAML;
+
+my $config = YAML::LoadFile($ENV{HOME} . '/.translatebot')
+    or die "Failed to read config file ~/.translatebot";
 
 Lingua::Translate::config (
     back_end => 'Google',
-    # TODO: read API key from a config file
-    api_key  => '*put API key here *',
-    referer  => 'http://blog.preshweb.co.uk/',
+    api_key  => $config->{api_key},
+    referer  => $config->{referer} || $config->{referrer}',
 );
 
 
