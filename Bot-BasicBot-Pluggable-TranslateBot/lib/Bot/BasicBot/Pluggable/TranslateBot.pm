@@ -10,6 +10,7 @@ use Lingua::Translate;
 use Lingua::Translate::Google;
 use I18N::LangTags::List;
 use HTML::Entities;
+use Unicode::MapUTF8;
 use YAML;
 
 my $config = YAML::LoadFile($ENV{HOME} . '/.translatebot')
@@ -144,10 +145,9 @@ sub _translate {
                     "ctoken$token";
                 }ge;
 
-    my $phrase = HTML::Entities::encode_entities
-    my $translation = decode_utf8(
-        HTML::Entities::encode_entities($lt->translate($phrase))
-    );
+    my $phrase = HTML::Entities::encode_entities($phrase);
+    my $translation = 
+        Encode::decode_utf8(HTML::Entities::decode_entities($lt->translate($phrase)));
     if (!$translation) {
         warn "No translation";
         return;
@@ -160,7 +160,7 @@ sub _translate {
     $translation =~ s{ctoken(\d+)}{$placeholders{$1}}ge;
 
     warn "Translation after replacing tokens: $translation";
-    return HTML::Entities::decode_entities($translation);
+    return $translation;
 }
 
 
