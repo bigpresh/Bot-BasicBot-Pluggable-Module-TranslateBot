@@ -10,7 +10,6 @@ use Lingua::Translate;
 use Lingua::Translate::Google;
 use I18N::LangTags::List;
 use HTML::Entities;
-use Unicode::MapUTF8;
 use YAML;
 
 my $config = YAML::LoadFile($ENV{HOME} . '/.translatebot')
