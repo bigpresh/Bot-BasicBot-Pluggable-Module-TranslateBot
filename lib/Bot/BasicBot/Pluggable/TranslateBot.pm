@@ -57,6 +57,8 @@ expected, you can also just say "me", to refer to yourself.
 <lang> can be any one of:
 $lang_list
 
+The code for this bot module is available on GitHub:
+https://github.com/bigpresh/Bot-BasicBot-Pluggable-Module-TranslateBot
 HELP
 }
 
@@ -166,3 +168,77 @@ sub _translate {
 
 1;
 __END__
+
+=head1 NAME
+
+Bot::BasicBot::Pluggable::Module::TranslateBot - automatic translations on IRC using Google Translate
+
+
+=head1 DESCRIPTION
+
+A module for L<Bot::BasicBot::Pluggable>-powered IRC bots to provide automated
+translations on IRC.
+
+Allows one-off translations of text, and, usefully, can also be told to
+automatically translate everything a user says into a specified language until
+told otherwise, making it easier to have a conversation with another user when
+there's no common language (subject, of course, to the vaguaries of Google
+Translate's automatic translations; it will work best if you use more formal
+language and avoid colloquialisms).
+
+
+
+
+=head1 USAGE
+
+Load the module as you would any other L<Bot::BasicBot::Pluggable> module, then,
+on IRC, use the following commands:
+
+=head2 Quick one-off translations
+
+You can translate directly with: 
+
+    translate <phrase> from <lang> to <lang>
+
+For example:
+
+    < bigpresh> translate This is a test of the bot from en to es
+    < translatebot> Esta es una prueba de que el robot
+
+
+You can also instruct the bot to automatically translate everything a given
+user says until you tell it to stop - to start automatic translations, say:
+
+    start translating for <nick> from <lang> to <lang>
+
+(C<nick> can be your nick or the nick of another user in the channel, or C<me>
+to mean your own nick)
+
+For example:
+
+    < bigpresh> start translating for me from en to es
+    < translatebot> +OK, I'll translate everything bigpresh says 
+        until you say 'stop translating for me'
+    < bigpresh> This is another test.
+    < translatebot> bigpresh said: 'Esta es otra prueba.'
+
+To stop automatic translations for yourself or another user:
+
+    stop translating for <nick>
+
+To stop all automatic translations: 
+
+    stop translating
+
+In the examples above, C<<lang>> can be any one of the language codes supported
+by Google Translate; the bot will determine this at runtime (via
+L<Lingua::Translate::Google>).  The list will be included in the help message
+presented by the bot (C</msg> the bot with C<help translatebot>).
+
+
+=head1 AUTHOR
+
+David Precious C<<davidp@preshweb.co.uk>>
+
+
+
