@@ -120,7 +120,11 @@ sub _translate {
         lc $_;
         if (!$self->{translate}{languages}{$_}) {
             warn "Unknown language $_";
-            return "Unrecognised language code $_";
+            return "Unrecognised language code $_\n"
+                . "The following language codes are available: " 
+                . join(', ', keys %{ $self->{translate}{languages} }) . "\n"
+                . "(/msg the bot with 'help translatebot' for a list with"
+                . " language names - too long to show here!\n";
         }
     }
     my $lt = Lingua::Translate->new(src => $from, dest => $to);
