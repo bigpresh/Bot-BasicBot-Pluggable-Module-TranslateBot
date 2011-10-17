@@ -148,7 +148,7 @@ sub _translate {
                     "ctoken$token";
                 }ge;
 
-    my $phrase = HTML::Entities::encode_entities($phrase);
+    $phrase = HTML::Entities::encode_entities($phrase);
     my $translation = 
         Encode::decode_utf8(HTML::Entities::decode_entities($lt->translate($phrase)));
     if (!$translation) {
