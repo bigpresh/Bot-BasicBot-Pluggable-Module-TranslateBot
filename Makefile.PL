@@ -3,10 +3,10 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME                => 'Bot::BasicBot::Pluggable::TranslateBot',
+    NAME                => 'Bot::BasicBot::Pluggable::Module::TranslateBot',
     AUTHOR              => q{David Precious <davidp@preshweb.co.uk>},
-    VERSION_FROM        => 'lib/Bot/BasicBot/Pluggable/TranslateBot.pm',
-    ABSTRACT_FROM       => 'lib/Bot/BasicBot/Pluggable/TranslateBot.pm',
+    VERSION_FROM        => 'lib/Bot/BasicBot/Pluggable/Module/TranslateBot.pm',
+    ABSTRACT_FROM       => 'lib/Bot/BasicBot/Pluggable/Module/TranslateBot.pm',
     ($ExtUtils::MakeMaker::VERSION >= 6.3002
       ? ('LICENSE'=> 'perl')
       : ()),
