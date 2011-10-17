@@ -121,7 +121,7 @@ sub _translate {
     my ($self, $phrase, $from, $to) = @_;
     warn "Translating '$phrase' from '$from' to '$to'";
     for ($from,$to) {
-        lc $_;
+        $_ = lc $_;
         if (!$self->{translate}{languages}{$_}) {
             warn "Unknown language $_";
             return "Unrecognised language code $_\n"
