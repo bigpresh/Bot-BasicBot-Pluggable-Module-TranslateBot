@@ -13,6 +13,13 @@ WriteMakefile(
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
+        'Bot::BasicBot::Pluggable::Module' => 0,
+        'Encode' => 0,
+        'Lingua::Translate' => 0,
+        'Lingua::Translate::Google' => 0,
+        'I18N::LangTags::List' => 0,
+        'HTML::Entities' => 0,
+        'YAML' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Bot-BasicBot-Pluggable-TranslateBot-*' },
