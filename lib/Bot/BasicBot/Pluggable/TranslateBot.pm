@@ -9,6 +9,8 @@ use I18N::LangTags::List;
 use HTML::Entities;
 use YAML;
 
+our $VERSION = 0.01;
+
 my $config = YAML::LoadFile($ENV{HOME} . '/.translatebot')
     or die "Failed to read config file ~/.translatebot";
 
