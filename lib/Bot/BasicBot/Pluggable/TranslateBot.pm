@@ -1,6 +1,3 @@
-
-# $Id$
-
 package Bot::BasicBot::Pluggable::Module::TranslateBot;
 use strict;
 use Bot::BasicBot::Pluggable::Module;
@@ -60,7 +57,6 @@ expected, you can also just say "me", to refer to yourself.
 <lang> can be any one of:
 $lang_list
 
-This is: $idtxt
 HELP
 }
 
