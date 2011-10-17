@@ -1,49 +1,62 @@
-Bot-BasicBot-Pluggable-TranslateBot
+NAME
+    Bot::BasicBot::Pluggable::Module::TranslateBot - automatic translations
+    on IRC using Google Translate
 
-A translation bot module for Perl Bot::BasicBot?::Pluggable bots.
+DESCRIPTION
+    A module for Bot::BasicBot::Pluggable-powered IRC bots to provide
+    automated translations on IRC.
 
-Provides commands to translate text to and from various languages, and supports
-automatic translation, whereby you can request that the bot translate everything
-you say until you ask it to stop. 
+    Allows one-off translations of text, and, usefully, can also be told to
+    automatically translate everything a user says into a specified language
+    until told otherwise, making it easier to have a conversation with
+    another user when there's no common language (subject, of course, to the
+    vaguaries of Google Translate's automatic translations; it will work
+    best if you use more formal language and avoid colloquialisms).
 
-INSTALLATION
+USAGE
+    Load the module as you would any other Bot::BasicBot::Pluggable module,
+    then, on IRC, use the following commands:
 
-To install this module, run the following commands:
+  Quick one-off translations
+    You can translate directly with:
 
-	perl Makefile.PL
-	make
-	make test
-	make install
+        translate <phrase> from <lang> to <lang>
 
-SUPPORT AND DOCUMENTATION
+    For example:
 
-After installing, you can find documentation for this module with the
-perldoc command.
+        < bigpresh> translate This is a test of the bot from en to es
+        < translatebot> Esta es una prueba de que el robot
 
-    perldoc Bot::BasicBot::Pluggable::TranslateBot
+    You can also instruct the bot to automatically translate everything a
+    given user says until you tell it to stop - to start automatic
+    translations, say:
 
-You can also look for information at:
+        start translating for <nick> from <lang> to <lang>
 
-    RT, CPAN's request tracker
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Bot-BasicBot-Pluggable-TranslateBot
+    (`nick' can be your nick or the nick of another user in the channel, or
+    `me' to mean your own nick)
 
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/Bot-BasicBot-Pluggable-TranslateBot
+    For example:
 
-    CPAN Ratings
-        http://cpanratings.perl.org/d/Bot-BasicBot-Pluggable-TranslateBot
+        < bigpresh> start translating for me from en to es
+        < translatebot> +OK, I'll translate everything bigpresh says 
+            until you say 'stop translating for me'
+        < bigpresh> This is another test.
+        < translatebot> bigpresh said: 'Esta es otra prueba.'
 
-    Search CPAN
-        http://search.cpan.org/dist/Bot-BasicBot-Pluggable-TranslateBot/
+    To stop automatic translations for yourself or another user:
 
+        stop translating for <nick>
 
-COPYRIGHT AND LICENCE
+    To stop all automatic translations:
 
-Copyright (C) 2009 David Precious
+        stop translating
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
+    In the examples above, `<lang'> can be any one of the language codes
+    supported by Google Translate; the bot will determine this at runtime
+    (via Lingua::Translate::Google). The list will be included in the help
+    message presented by the bot (`/msg' the bot with `help translatebot').
 
-See http://dev.perl.org/licenses/ for more information.
+AUTHOR
+    David Precious `<davidp@preshweb.co.uk'>
 
